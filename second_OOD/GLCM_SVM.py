@@ -58,7 +58,7 @@ def grid(data_x, data_y):
     print(grid_search.best_params_)
 
 
-if __name__ == '__main__':
+def detect():
     Files = ['dataset/train/CT1', 'dataset/train/CT2', 'dataset/train/CT4']
     Bins = 200
     Data, y_label = np.zeros(6), np.zeros([1, 1])
