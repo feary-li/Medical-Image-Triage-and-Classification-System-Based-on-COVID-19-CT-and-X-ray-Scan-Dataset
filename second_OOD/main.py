@@ -1,5 +1,5 @@
-import greycomatrix_SVM as GS
-import Mahalanobis as Ma
+import GLCM_SVM as GS
+import Mahalanobis_Distance as Ma
 
 if __name__ == '__main__':
     GS.detect()
