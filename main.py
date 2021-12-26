@@ -1,6 +1,6 @@
 import first_OOD.first_ood as SVM
-import second_OOD.greycomatrix_SVM as GS
-import second_OOD.Mahalanobis as Ma
+import GLCM_SVM as GS
+import Mahalanobis_distance as Ma
 
 if __name__ == '__main__':
   
