@@ -97,7 +97,7 @@ class VGGNet:
 
         return mah
 
-    def predict(self, dir_prd, mu, sigma1, sigma2, sigma3, sigma4, target):
+    def predict(self, dir_prd, mu, sigma1, sigma2, target):
         name = self.set_name(dir_prd)
         prd = np.zeros(len(name))
         i = 0
@@ -109,10 +109,10 @@ class VGGNet:
                     maha = self.maha(feature_prd, mu[j, :], sigma1)
                 elif j == 1:
                     maha = self.maha(feature_prd, mu[j, :], sigma2)
-                elif j == 2:
-                    maha = self.maha(feature_prd, mu[j, :], sigma3)
-                else:
-                    maha = self.maha(feature_prd, mu[j, :], sigma4)
+                # elif j == 2:
+                #     maha = self.maha(feature_prd, mu[j, :], sigma3)
+                # else:
+                #     maha = self.maha(feature_prd, mu[j, :], sigma4)
                 maha = np.array(maha).reshape(512, 1)
                 loss_output = self.KL_divergence(maha, target[:, j].reshape(512, 1))
                 CE[j] = loss_output
@@ -125,28 +125,25 @@ class VGGNet:
         return tar * np.ones(len(name))
 
 
-if __name__ == '__main__':
+def detect():
     model = VGGNet()
     CT1, mu1, sigma1 = model.mahalanobis('dataset/train/CT1')
     CT2, mu2, sigma2 = model.mahalanobis('dataset/train/CT2')
-    CT3, mu3, sigma3 = model.mahalanobis('dataset/train/CT3')
-    CT4, mu4, sigma4 = model.mahalanobis('dataset/train/CT4')
+    # CT3, mu3, sigma3 = model.mahalanobis('dataset/train/CT3')
+    # CT4, mu4, sigma4 = model.mahalanobis('dataset/train/CT4')
 
-    mu = np.array([mu1, mu2, mu3, mu4])
-    CT = np.hstack((CT1, CT2, CT3, CT4))
+    mu = np.array([mu1, mu2])
+    CT = np.hstack((CT1, CT2))
 
     test_p1 = 'dataset/test/CT1'
     test_p2 = 'dataset/test/CT2'
-    test_p3 = 'dataset/test/CT3'
-    test_p4 = 'dataset/test/CT4'
+    # test_p3 = 'dataset/test/CT3'
+    # test_p4 = 'dataset/test/CT4'
 
-    target = np.hstack((model.target(test_p1, 1), model.target(test_p2, 2), model.target(test_p3, 3),
-                       model.target(test_p4, 4)))
+    target = np.hstack((model.target(test_p1, 1), model.target(test_p2, 2)))
 
-    prd = np.hstack((model.predict(test_p1, mu, sigma1, sigma2, sigma3, sigma4, CT),
-                     model.predict(test_p2, mu, sigma1, sigma2, sigma3, sigma4, CT),
-                     model.predict(test_p3, mu, sigma1, sigma2, sigma3, sigma4, CT),
-                     model.predict(test_p4, mu, sigma1, sigma2, sigma3, sigma4, CT)))
+    prd = np.hstack((model.predict(test_p1, mu, sigma1, sigma2, CT),
+                     model.predict(test_p2, mu, sigma1, sigma2, CT)))
 
     # 热力图
     sns.set()
