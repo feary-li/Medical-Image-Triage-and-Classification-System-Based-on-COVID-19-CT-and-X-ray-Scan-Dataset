@@ -291,29 +291,38 @@ def train_finetuning_s(net, learning_rate, lr_period, lr_decay, num_epochs=5):
     train_s(net, train_ss, valid_ss, loss, trainer, scheduler, num_epochs, device)
 
 lr_period, lr_decay, LR = 20, 0.5, 1e-4
-train_finetuning_s(finetune_net, LR, lr_period, lr_decay, num_epochs=100)
+lr_period, lr_decay, LR = 20, 0.5, 1e-4
 
-# 读取监督学习得到的参数，进行迁移学习
-finetune_net.load_state_dict(torch.load('FTdensennet169_jiandu.params'))
+def self_supervised():
+    train_finetuning_s(finetune_net, LR, lr_period, lr_decay, num_epochs=100)
 
-# 对于实际的分类目标进行二次训练，对参数进行微调
-train_finetuning(finetune_net, LR, lr_period, lr_decay, num_epochs=100)
+def final_classify():
 
-finetune_net.load_state_dict(torch.load('FTdensennet169.params'))
-
-from sklearn.metrics import accuracy_score, classification_report
-
-train_acc = evaluate_accuracy_gpu(finetune_net, train_iter, device = try_gpu(2))
-valid_acc = evaluate_accuracy_gpu(finetune_net, valid_iter, device = try_gpu(2))
-
-# 进行测试集的分类
-y_pred, test_y = predict(finetune_net, test_iter, try_gpu(2))
-# print(test_y)
-# print(y_pred)
-test_acc = accuracy_score(test_y, y_pred)
-
-# 输出最终结果
-print("Train Accuracy:\t", train_acc)
-print("Val Accuracy:\t", valid_acc)
-print("Test Accuracy:\t", test_acc)
-print(classification_report(test_y, y_pred))  
+    self_supervised()
+    
+    # 读取监督学习得到的参数，进行迁移学习
+    finetune_net.load_state_dict(torch.load('FTdensennet169_jiandu.params'))
+    
+    # 对于实际的分类目标进行二次训练，对参数进行微调
+    train_finetuning(finetune_net, LR, lr_period, lr_decay, num_epochs=100)
+    
+    finetune_net.load_state_dict(torch.load('FTdensennet169.params'))
+    
+    from sklearn.metrics import accuracy_score, classification_report
+    
+    train_acc = evaluate_accuracy_gpu(finetune_net, train_iter, device = try_gpu(2))
+    valid_acc = evaluate_accuracy_gpu(finetune_net, valid_iter, device = try_gpu(2))
+    
+    # 进行测试集的分类
+    y_pred, test_y = predict(finetune_net, test_iter, try_gpu(2))
+    # print(test_y)
+    # print(y_pred)
+    test_acc = accuracy_score(test_y, y_pred)
+    
+    # 输出最终结果
+    print("Train Accuracy:\t", train_acc)
+    print("Val Accuracy:\t", valid_acc)
+    print("Test Accuracy:\t", test_acc)
+    print(classification_report(test_y, y_pred))
+    
+final_classify() 
