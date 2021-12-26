@@ -308,6 +308,9 @@ def final_classify():
     
     finetune_net.load_state_dict(torch.load('FTdensennet169.params'))
     
+#     # 可直接读取最优参数，得到最优分类结果
+#     finetune_net.load_state_dict(torch.load('FTdensennet169——best.params'))
+    
     from sklearn.metrics import accuracy_score, classification_report
     
     train_acc = evaluate_accuracy_gpu(finetune_net, train_iter, device = try_gpu(2))
