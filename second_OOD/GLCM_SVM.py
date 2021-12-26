@@ -106,4 +106,3 @@ def detect():
     ax.set_ylabel('true')  # y轴
 
     plt.show()
-
