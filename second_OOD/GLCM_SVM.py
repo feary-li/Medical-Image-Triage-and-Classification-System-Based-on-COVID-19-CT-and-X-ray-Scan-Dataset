@@ -59,7 +59,7 @@ def grid(data_x, data_y):
 
 
 def detect():
-    Files = ['dataset/train/CT1', 'dataset/train/CT2', 'dataset/train/CT4']
+    Files = ['dataset/second_OOD/train/CT1', 'dataset/second_OOD/train/CT2', 'dataset/second_OOD/train/CT4']
     Bins = 200
     Data, y_label = np.zeros(6), np.zeros([1, 1])
     x_train, y_train = feature(Files, Data, bins=Bins, y=y_label)
@@ -68,7 +68,7 @@ def detect():
 
     print('successfully read train dataset')
 
-    test_files = ['dataset/test/CT1', 'dataset/test/CT2', 'dataset/test/CT4']
+    test_files = ['dataset/second_OOD/test/CT1', 'dataset/second_OOD/test/CT2', 'dataset/second_OOD/test/CT4']
     x_test, y_test = feature(test_files, Data, bins=Bins, y=y_label)
 
     x_test, y_test = np.delete(x_test, [0], axis=0), np.delete(y_test, [0], axis=0)
