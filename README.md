@@ -43,19 +43,33 @@ If you want to test the step of our integrated criticism system， you can run t
 If you want to test the classification model, you can run the code, you can run the code name 'DenseNet169.py' which is under the folder called 'classification_model'.
 
  //文件的下载
+ 
     downloadFile(item) {
+    
       var x = new XMLHttpRequest();
+      
       x.open("GET", item.url, true);
+      
       x.responseType = 'blob';
+      
       x.onload = function (e) {
+      
         var url = window.URL.createObjectURL(x.response)
+        
         var a = document.createElement('a');
+        
         a.href = url
+        
         a.download = item.name ; //下载后的文件名
+        
         a.click()
+        
       }
+      
       x.send();
+      
       // this.$message.success('下载成功!')
+      
     }
 
 
