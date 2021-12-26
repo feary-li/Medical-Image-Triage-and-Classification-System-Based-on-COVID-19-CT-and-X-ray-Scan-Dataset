@@ -9,14 +9,28 @@ All of the datasets are in the folder called 'dataset', there are three differen
 ## Requirement
 
 Before you run the code, you must confirm that your python environment has such packages:
+
 skimage;
+
 os;
+
 sklearn;
+
 seaborn;
+
 matplotlib;
+
 keras;
+
 numpy;
+
 scrpy;
+
+time;
+
+toch;
+
+IPython;
 
 
 
