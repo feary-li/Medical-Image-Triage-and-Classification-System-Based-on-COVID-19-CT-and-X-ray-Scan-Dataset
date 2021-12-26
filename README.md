@@ -42,4 +42,4 @@ If you want to test the step of first OOD, you can run the code under the folder
 If you want to test the step of our integrated criticism system， you can run the code name 'main.py' which is under the folder called 'second_OOD'. The results from both the GLCM_SVM and our VMDD will be shown when you run the code.
 If you want to test the classification model, you can run the code, you can run the code name 'DenseNet169.py' which is under the folder called 'classification_model'.
 
-<a href="D:\大学本科课程\SDM374\project\code\OOD\feature\dataset.rar" download="dataset.rar">dataset</a>
+<a href="D:\大学本科课程\SDM374\project\code\OOD\feature\dataset.rar" download="dataset.rar">点击下载</a>
