@@ -127,18 +127,18 @@ class VGGNet:
 
 def detect():
     model = VGGNet()
-    CT1, mu1, sigma1 = model.mahalanobis('dataset/train/CT1')
-    CT2, mu2, sigma2 = model.mahalanobis('dataset/train/CT2')
-    # CT3, mu3, sigma3 = model.mahalanobis('dataset/train/CT3')
-    # CT4, mu4, sigma4 = model.mahalanobis('dataset/train/CT4')
+    CT1, mu1, sigma1 = model.mahalanobis('dataset/second_OOD/train/CT1')
+    CT2, mu2, sigma2 = model.mahalanobis('dataset/second_OOD/train/CT2')
+    # CT3, mu3, sigma3 = model.mahalanobis('dataset/second_OOD/train/CT3')
+    # CT4, mu4, sigma4 = model.mahalanobis('dataset/second_OOD/train/CT4')
 
     mu = np.array([mu1, mu2])
     CT = np.hstack((CT1, CT2))
 
-    test_p1 = 'dataset/test/CT1'
-    test_p2 = 'dataset/test/CT2'
-    # test_p3 = 'dataset/test/CT3'
-    # test_p4 = 'dataset/test/CT4'
+    test_p1 = 'dataset/second_OOD/test/CT1'
+    test_p2 = 'dataset/second_OOD/test/CT2'
+    # test_p3 = 'dataset/second_OOD/test/CT3'
+    # test_p4 = 'dataset/second_OOD/test/CT4'
 
     target = np.hstack((model.target(test_p1, 1), model.target(test_p2, 2)))
 
