@@ -160,3 +160,5 @@ def detect():
     print(classification_report(target, prd))
 
     plt.show()
+
+    
