@@ -6,7 +6,7 @@ from IPython import display
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-import myTransforms
+# import myTransforms
 from PIL import Image
 
 # 中值滤波函数
@@ -36,7 +36,7 @@ batch_size = 10
 normalize = torchvision.transforms.Normalize(
     [0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
-data_dir = 'content/covid19_CT'
+data_dir = 'dataset/classification_model/content/covid19_CT'
 
 # 监督学习
 train_ss = torchvision.transforms.Compose([
