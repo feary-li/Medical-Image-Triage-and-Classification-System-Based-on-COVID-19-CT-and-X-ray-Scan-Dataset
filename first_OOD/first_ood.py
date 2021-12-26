@@ -15,7 +15,7 @@ def loader():
     train_data = []
     y_train = []
     for cla in range(1,2):
-        file_path = 'dataset/train/CT'
+        file_path = 'dataset/first_OOD/train/CT'
         img_dirs = os.listdir(file_path)
         for item in img_dirs:
             img_dir = os.path.join(file_path, item)
@@ -29,7 +29,7 @@ def loader():
             y_train.append(0)
 
     for cla in range(1,2):
-        file_path = 'dataset/train/X-ray'
+        file_path = 'dataset/first_OOD/train/X-ray'
         img_dirs = os.listdir(file_path)
         for item in img_dirs:
             img_dir = os.path.join(file_path, item)
@@ -45,7 +45,7 @@ def loader():
     test_data = []
     y_test = []
     for cla in range(1,2):
-        file_path = 'dataset/test'
+        file_path = 'dataset/first_OOD/test'
         img_dirs = os.listdir(file_path)
         for item in img_dirs:
             img_dir = os.path.join(file_path, item)
@@ -103,7 +103,7 @@ def first_OOD():
     
     i = 0
     d_I = []
-    file_path = 'dataset/test'
+    file_path = 'dataset/first_OOD/test'
     
     for cla in range(np.array(d_l).shape[0]):
               img_dirs = os.listdir(file_path)
